@@ -22,6 +22,10 @@ import App from 'containers/App';
 // Import Language Provider
 import LanguageProvider from 'containers/LanguageProvider';
 
+// Importing AWS Amplify and config
+import Amplify from 'aws-amplify';
+import config from '../src/aws-exports';
+
 // Load the favicon and the .htaccess file
 /* eslint-disable import/no-unresolved, import/extensions */
 import '!file-loader?name=[name].[ext]!./images/favicon.ico';
@@ -32,6 +36,9 @@ import configureStore from './configureStore';
 
 // Import i18n messages
 import { translationMessages } from './i18n';
+
+// Configuring AWS Amplify
+Amplify.configure(config);
 
 // Create redux store with history
 const initialState = {};
