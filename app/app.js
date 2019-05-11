@@ -24,7 +24,7 @@ import LanguageProvider from 'containers/LanguageProvider';
 
 // Importing AWS Amplify and config
 import Amplify from 'aws-amplify';
-import config from '../src/aws-exports';
+import config from './aws-exports';
 
 // Load the favicon and the .htaccess file
 /* eslint-disable import/no-unresolved, import/extensions */
