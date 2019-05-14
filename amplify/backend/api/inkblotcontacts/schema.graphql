@@ -1,0 +1,8 @@
+type Contact @model @auth(rules: [{ allow: owner }]) {
+  id: ID!
+  name: String!
+  type: String!
+  email: String
+  phonenumber: String
+  photo: String
+}

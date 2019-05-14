@@ -10,13 +10,15 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 
+import { withAuthenticator } from 'aws-amplify-react';
+
 import HomePage from 'containers/HomePage/Loadable';
 import NotFoundPage from 'containers/NotFoundPage/Loadable';
 import NavBar from '../../components/NavBar';
 
 import GlobalStyle from '../../global-styles';
 
-export default function App() {
+function App() {
   return (
     <div>
       <NavBar />
@@ -28,3 +30,5 @@ export default function App() {
     </div>
   );
 }
+
+export default withAuthenticator(App);

@@ -1,8 +1,17 @@
 {
-	"auth": {
-		"cognitoef064715": {
-			"service": "Cognito",
-			"providerPlugin": "awscloudformation"
-		}
-	}
+  "auth": {
+    "cognitoa29f5f5f": {
+      "service": "Cognito",
+      "providerPlugin": "awscloudformation"
+    }
+  },
+  "api": {
+    "inkblotcontacts": {
+      "service": "AppSync",
+      "providerPlugin": "awscloudformation",
+      "output": {
+        "securityType": "AMAZON_COGNITO_USER_POOLS"
+      }
+    }
+  }
 }

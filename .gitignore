@@ -9,6 +9,8 @@ stats.json
 npm-debug.log
 .idea
 
+.vscode
+
 #amplify
 amplify/\#current-cloud-backend
 amplify/.config/local-*
@@ -17,6 +19,5 @@ amplify/backend/awscloudformation
 build/
 dist/
 node_modules/
+aws-exports.js
 awsconfiguration.json
-
-.vscode
