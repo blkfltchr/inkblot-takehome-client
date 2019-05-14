@@ -29,7 +29,7 @@ class ContactList extends Component {
       <div>
         <h2>Contacts</h2>
         {this.state.contacts.map(contact => (
-          <div id={contact.id}>
+          <div key={contact.id}>
             <h3>{contact.name}</h3>
             <p>{contact.email}</p>
           </div>
