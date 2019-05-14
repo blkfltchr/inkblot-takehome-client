@@ -3,24 +3,15 @@
 const awsmobile = {
   aws_project_region: 'us-east-2',
   aws_cognito_identity_pool_id:
-    'us-east-2:96f2ff55-2c1a-4c52-bf95-1086e0b4d833',
+    'us-east-2:8c1946d4-fa6b-4a30-a789-d561043b9bc0',
   aws_cognito_region: 'us-east-2',
-  aws_user_pools_id: 'us-east-2_hPDAId9HZ',
-  aws_user_pools_web_client_id: '3ttf4prg740pqaeuu2nrtr3kbv',
-  oauth: {
-    domain: 'inkblottakehome-local.auth.us-east-2.amazoncognito.com',
-    scope: [
-      'phone',
-      'email',
-      'openid',
-      'profile',
-      'aws.cognito.signin.user.admin',
-    ],
-    redirectSignIn: 'http://localhost:3000/',
-    redirectSignOut: 'http://localhost:3000/',
-    responseType: 'code',
-  },
-  federationTarget: 'COGNITO_USER_POOLS',
+  aws_user_pools_id: 'us-east-2_pcvgZT0qu',
+  aws_user_pools_web_client_id: 'iq5dmm4uot825rnhbv9mac6a1',
+  oauth: {},
+  aws_appsync_graphqlEndpoint:
+    'https://fri4hlalyjhivjpj6p6e7s5ssu.appsync-api.us-east-2.amazonaws.com/graphql',
+  aws_appsync_region: 'us-east-2',
+  aws_appsync_authenticationType: 'AMAZON_COGNITO_USER_POOLS',
 };
 
 export default awsmobile;

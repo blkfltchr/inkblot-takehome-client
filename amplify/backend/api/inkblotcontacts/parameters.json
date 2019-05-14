@@ -1,0 +1,7 @@
+{
+  "AppSyncApiName": "inkblotcontacts",
+  "DynamoDBBillingMode": "PAY_PER_REQUEST",
+  "AuthCognitoUserPoolId": {
+    "Fn::GetAtt": ["authcognitoa29f5f5f", "Outputs.UserPoolId"]
+  }
+}

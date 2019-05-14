@@ -1,13 +1,5 @@
 import React from 'react';
-
-// Importing Auth from aws-amplify to create sign in function
 import { Auth } from 'aws-amplify';
-
-function checkUser() {
-  Auth.currentAuthenticatedUser()
-    .then(user => console.log({ user }))
-    .catch(err => console.log(err));
-}
 
 function signOut() {
   Auth.signOut()
@@ -17,14 +9,9 @@ function signOut() {
 
 const NavBar = () => (
   <div>
-    <button type="button" onClick={() => Auth.federatedSignIn()}>
-      Sign In
-    </button>
-    <button type="button" onClick={checkUser}>
-      Check User
-    </button>
+    <span>Home</span>
     <button type="button" onClick={signOut}>
-      Sign Out
+      Sign out
     </button>
   </div>
 );

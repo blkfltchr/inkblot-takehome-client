@@ -1,17 +1,15 @@
 {
-    "projectName": "inkblottakehome",
-    "version": "2.0",
-    "frontend": "javascript",
-    "javascript": {
-        "framework": "react",
-        "config": {
-            "SourceDir": "src",
-            "DistributionDir": "build",
-            "BuildCommand": "npm run build",
-            "StartCommand": "npm start"
-        }
-    },
-    "providers": [
-        "awscloudformation"
-    ]
+  "projectName": "inkblot-amplify",
+  "version": "2.0",
+  "frontend": "javascript",
+  "javascript": {
+    "framework": "react",
+    "config": {
+      "SourceDir": "app",
+      "DistributionDir": "build",
+      "BuildCommand": "npm run build",
+      "StartCommand": "npm run start:production"
+    }
+  },
+  "providers": ["awscloudformation"]
 }
