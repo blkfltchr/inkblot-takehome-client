@@ -8,6 +8,7 @@
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 import messages from './messages';
+import CreateContact from '../CreateContact';
 import ContactList from '../ContactList';
 
 export default function HomePage() {
@@ -16,6 +17,7 @@ export default function HomePage() {
       <h1>
         <FormattedMessage {...messages.header} />
       </h1>
+      <CreateContact />
       <ContactList />
     </div>
   );
