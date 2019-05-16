@@ -1,5 +1,8 @@
 import React from 'react';
 import { Auth } from 'aws-amplify';
+import AppBar from '@material-ui/core/AppBar';
+import Toolbar from '@material-ui/core/Toolbar';
+import Button from '@material-ui/core/Button';
 
 function signOut() {
   Auth.signOut()
@@ -9,10 +12,13 @@ function signOut() {
 
 const NavBar = () => (
   <div>
-    <span>Home</span>
-    <button type="button" onClick={signOut}>
-      Sign out
-    </button>
+    <AppBar position="static">
+      <Toolbar>
+        <Button color="inherit" onClick={signOut}>
+          Log out
+        </Button>
+      </Toolbar>
+    </AppBar>
   </div>
 );
 
