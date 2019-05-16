@@ -30,6 +30,10 @@ const GlobalStyle = createGlobalStyle`
   h1, h2 {
     text-align: center;
   }
+
+  a {
+    text-decoration: none;
+  }
 `;
 
 export default GlobalStyle;

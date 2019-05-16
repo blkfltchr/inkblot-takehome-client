@@ -84,7 +84,11 @@ class ContactCard extends Component {
             <Typography variant="subtitle1" color="textSecondary">
               {contact.type}
             </Typography>
-            <Typography component="p">{contact.email}</Typography>
+            <a href={`mailto:${contact.email}`}>
+              <Typography component="p" color="primary">
+                {contact.email}
+              </Typography>
+            </a>
             <Typography component="p">{contact.phonenumber}</Typography>
           </CardContent>
           <CardActions className={classes.actions} disableActionSpacing>
