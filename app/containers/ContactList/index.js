@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { API, graphqlOperation } from 'aws-amplify';
+import ContactCard from '../ContactCard';
 
 const ListContacts = `
 query list {
@@ -29,10 +30,7 @@ class ContactList extends Component {
       <div>
         <h2>Contacts</h2>
         {this.state.contacts.map(contact => (
-          <div key={contact.id}>
-            <h3>{contact.name}</h3>
-            <p>{contact.email}</p>
-          </div>
+          <ContactCard key={contact.id} contact={contact} />
         ))}
       </div>
     );
