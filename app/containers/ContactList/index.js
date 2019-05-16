@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import { API, graphqlOperation } from 'aws-amplify';
@@ -8,6 +9,8 @@ import Paper from '@material-ui/core/Paper';
 import InputBase from '@material-ui/core/InputBase';
 import IconButton from '@material-ui/core/IconButton';
 import SearchIcon from '@material-ui/icons/Search';
+import Button from '@material-ui/core/Button';
+import AddIcon from '@material-ui/icons/Add';
 import ContactCard from '../ContactCard';
 
 const ListContacts = `
@@ -44,6 +47,10 @@ const styles = {
   },
   iconButton: {
     padding: 10,
+  },
+  fullButton: {
+    width: '100%',
+    marginTop: '20px',
   },
 };
 
@@ -131,6 +138,16 @@ class ContactList extends Component {
         {this.filterContacts().map(contact => (
           <ContactCard key={contact.id} contact={contact} />
         ))}
+        <Link to="/add">
+          <Button
+            variant="contained"
+            color="primary"
+            className={classes.fullButton}
+          >
+            <AddIcon />
+            Add a contact
+          </Button>
+        </Link>
       </div>
     );
   }

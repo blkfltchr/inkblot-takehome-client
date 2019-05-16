@@ -33,6 +33,9 @@ const GlobalStyle = createGlobalStyle`
 
   a {
     text-decoration: none;
+    :focus {
+      outline: 0;
+    }
   }
 `;
 

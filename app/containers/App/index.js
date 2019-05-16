@@ -15,6 +15,7 @@ import { withAuthenticator } from 'aws-amplify-react';
 import HomePage from 'containers/HomePage/Loadable';
 import NotFoundPage from 'containers/NotFoundPage/Loadable';
 import NavBar from '../../components/NavBar';
+import CreateContact from '../CreateContact';
 
 import GlobalStyle from '../../global-styles';
 
@@ -24,6 +25,7 @@ function App() {
       <NavBar />
       <Switch>
         <Route exact path="/" component={HomePage} />
+        <Route exact path="/add" component={CreateContact} />
         <Route component={NotFoundPage} />
       </Switch>
       <GlobalStyle />
