@@ -9,15 +9,20 @@ contact information.
 
 ### Features include:
 
-- [ ] Add, edit, and remove Contacts
+- [x] Add Contacts
+- [ ] Edit Contacts
+- [x] Remove Contacts
 - [ ] Sort contacts by First Name, Last Name, or other criteria
 - [ ] Upload or otherwise source an image for each contact
-- [ ] Group/Tag Contacts
+- [x] Group/Tag Contacts
 - [x] Authenticate users
 - [ ] Allow users to create their own lists
+- [x] Search contacts by First Name/Last Name
 
 ### Built using:
 
-- [x] React and Redux
+- [x] React for the front end
 - [x] react-boilerplate for bootstrapping
 - [x] AWS amplify for authentication
+- [x] GraphQL for database (queries, mutations, etc.)
+- [x] Material UI for styling
