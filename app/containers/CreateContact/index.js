@@ -64,7 +64,6 @@ class CreateContact extends Component {
         phonenumber: '',
         photo: '',
       });
-      // await console.log(input);
       await API.graphql(graphqlOperation(mutations.createContact, { input }));
       console.log('New contact successfully added.');
       window.location.reload();
