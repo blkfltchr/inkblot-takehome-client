@@ -37,6 +37,20 @@ const GlobalStyle = createGlobalStyle`
       outline: 0;
     }
   }
+
+  @media only screen and (max-width: 600px) {
+    p, label, a {
+      font-size: 0.8em !important;
+    }
+
+    h1, h2, h5 {
+      font-size: 1.2em !important;
+    }
+
+    h6 {
+      font-size: 1em !important;
+    }
+}
 `;
 
 export default GlobalStyle;

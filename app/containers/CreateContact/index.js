@@ -10,6 +10,7 @@ import Select from '@material-ui/core/Select';
 import OutlinedInput from '@material-ui/core/OutlinedInput';
 import MenuItem from '@material-ui/core/MenuItem';
 import InputLabel from '@material-ui/core/InputLabel';
+import { withRouter } from 'react-router';
 import * as mutations from '../../graphql/mutations';
 
 const styles = () => ({
@@ -66,7 +67,7 @@ class CreateContact extends Component {
       });
       await API.graphql(graphqlOperation(mutations.createContact, { input }));
       console.log('New contact successfully added.');
-      window.location.reload();
+      this.props.history.push('/');
     } catch (err) {
       console.log(err);
     }
@@ -162,6 +163,7 @@ class CreateContact extends Component {
 
 CreateContact.propTypes = {
   classes: PropTypes.object.isRequired,
+  history: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(CreateContact);
+export default withRouter(withStyles(styles)(CreateContact));

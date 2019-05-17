@@ -13,13 +13,17 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import DeleteContact from '../DeleteContact';
 import * as mutations from '../../graphql/mutations';
 
-const styles = () => ({
+const styles = theme => ({
   card: {
     display: 'flex',
-    height: 200,
+    height: 'auto',
     maxWidth: 500,
     width: '90%',
     margin: '20px auto',
+    alignItems: 'center',
+    [theme.breakpoints.up('sm')]: {
+      height: 200,
+    },
   },
   details: {
     display: 'flex',
@@ -33,10 +37,16 @@ const styles = () => ({
     display: 'flex',
   },
   cover: {
-    minWidth: 200,
-    maxWidth: 200,
-    minHeight: 200,
-    maxHeight: 200,
+    minWidth: 150,
+    maxWidth: 150,
+    minHeight: 150,
+    maxHeight: 150,
+    [theme.breakpoints.up('sm')]: {
+      minWidth: 200,
+      maxWidth: 200,
+      minHeight: 200,
+      maxHeight: 200,
+    },
   },
 });
 
@@ -119,4 +129,4 @@ ContactCard.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(ContactCard);
+export default withStyles(styles, { withTheme: true })(ContactCard);

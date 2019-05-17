@@ -12,12 +12,12 @@ contact information.
 - [x] Add Contacts
 - [ ] Edit Contacts
 - [x] Remove Contacts
-- [ ] Sort contacts by First Name, Last Name, or other criteria
+- [x] Search contacts by First Name/Last Name
 - [ ] Upload or otherwise source an image for each contact
-- [x] Group/Tag Contacts
+- [x] Group Contacts and sort them based on their types
 - [x] Authenticate users
 - [ ] Allow users to create their own lists
-- [x] Search contacts by First Name/Last Name
+- [x] Mobile responsiveness
 
 ### Built using:
 

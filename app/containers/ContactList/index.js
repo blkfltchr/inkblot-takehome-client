@@ -50,7 +50,7 @@ const styles = {
   },
   fullButton: {
     width: '100%',
-    marginTop: '20px',
+    margin: '20px auto',
   },
 };
 
@@ -104,10 +104,7 @@ class ContactList extends Component {
 
   render() {
     const { classes } = this.props;
-    const { contacts, value, searchText } = this.state;
-    if (!contacts) {
-      return <h2>Please add a contact...</h2>;
-    }
+    const { value, searchText } = this.state;
     return (
       <div className={classes.root}>
         <h2>Contacts</h2>
