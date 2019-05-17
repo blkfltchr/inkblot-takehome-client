@@ -11,6 +11,7 @@ import OutlinedInput from '@material-ui/core/OutlinedInput';
 import MenuItem from '@material-ui/core/MenuItem';
 import InputLabel from '@material-ui/core/InputLabel';
 import { withRouter } from 'react-router';
+import Typography from '@material-ui/core/Typography';
 import * as mutations from '../../graphql/mutations';
 
 const styles = () => ({
@@ -144,6 +145,11 @@ class CreateContact extends Component {
               onChange={this.handleChange}
               variant="outlined"
             />
+          </FormControl>
+          <FormControl>
+            <Typography color="secondary">
+              * All fields are required.
+            </Typography>
           </FormControl>
           <FormControl className={classes.formControl}>
             <Button
