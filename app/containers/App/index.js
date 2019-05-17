@@ -14,14 +14,24 @@ import { withAuthenticator } from 'aws-amplify-react';
 
 import HomePage from 'containers/HomePage/Loadable';
 import NotFoundPage from 'containers/NotFoundPage/Loadable';
+import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import NavBar from '../../components/NavBar';
 import CreateContact from '../CreateContact';
 
 import GlobalStyle from '../../global-styles';
 
+const theme = createMuiTheme({
+  palette: {
+    primary: {
+      main: '#FF9900',
+      contrastText: '#FFF',
+    },
+  },
+});
+
 function App() {
   return (
-    <div>
+    <MuiThemeProvider theme={theme}>
       <NavBar />
       <Switch>
         <Route exact path="/" component={HomePage} />
@@ -29,7 +39,7 @@ function App() {
         <Route component={NotFoundPage} />
       </Switch>
       <GlobalStyle />
-    </div>
+    </MuiThemeProvider>
   );
 }
 
