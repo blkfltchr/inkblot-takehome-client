@@ -16,7 +16,6 @@ contact information.
 - [x] Add an image for each contact via a url
 - [x] Group Contacts and sort them based on their types
 - [x] Authenticate users
-- [ ] Allow users to create their own lists
 - [x] Mobile responsiveness
 
 ### Built using:

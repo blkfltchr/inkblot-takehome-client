@@ -27,10 +27,10 @@ const styles = theme => ({
     display: 'flex',
   },
   cover: {
-    minWidth: 150,
-    maxWidth: 150,
-    minHeight: 150,
-    maxHeight: 150,
+    minWidth: 100,
+    maxWidth: 100,
+    minHeight: 100,
+    maxHeight: 100,
     [theme.breakpoints.up('sm')]: {
       minWidth: 200,
       maxWidth: 200,
