@@ -83,6 +83,7 @@ class ContactCard extends Component {
           contact={contact}
           open={this.state.open}
           handleEdit={this.handleEdit}
+          handleDelete={this.handleDelete}
           handleClickOpen={this.handleClickOpen}
           handleClose={this.handleClose}
         />
