@@ -10,7 +10,7 @@ contact information.
 ### Features include:
 
 - [x] Add Contacts
-- [ ] Edit Contacts
+- [x] Edit Contacts
 - [x] Remove Contacts
 - [x] Search contacts by First Name/Last Name
 - [x] Add an image for each contact via a url
