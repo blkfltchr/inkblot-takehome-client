@@ -13,7 +13,7 @@ contact information.
 - [ ] Edit Contacts
 - [x] Remove Contacts
 - [x] Search contacts by First Name/Last Name
-- [ ] Upload or otherwise source an image for each contact
+- [x] Add an image for each contact via a url
 - [x] Group Contacts and sort them based on their types
 - [x] Authenticate users
 - [ ] Allow users to create their own lists
