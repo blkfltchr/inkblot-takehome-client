@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
@@ -54,100 +54,88 @@ const styles = {
   },
 };
 
-class ContactList extends Component {
-  state = {
-    contacts: [],
-    value: 0,
-    searchText: '',
+function ContactList(props) {
+  const [contacts, setContacts] = useState([]);
+  const [tab, setTab] = useState(0);
+  const [searchText, setSearchText] = useState('');
+
+  useEffect(() => {
+    async function fetchContacts() {
+      const contactsData = await API.graphql(graphqlOperation(ListContacts));
+      setContacts(contactsData.data.listContacts.items);
+    }
+    fetchContacts();
+  }, [ListContacts]);
+
+  const handleTabs = (e, value) => {
+    setTab(value);
   };
 
-  async componentDidMount() {
-    const contacts = await API.graphql(graphqlOperation(ListContacts));
-    this.setState({ contacts: contacts.data.listContacts.items });
-  }
-
-  handleTabs = (event, value) => {
-    this.setState({ value });
-  };
-
-  handleSearch = e => {
-    this.setState({ [e.target.name]: e.target.value });
-  };
-
-  searchContacts = () => {
-    if (this.state.searchText.length > 0) {
-      const newText = this.state.searchText.replace(/\\$/, '');
+  const searchContacts = () => {
+    if (searchText.length > 0) {
+      const newText = searchText.replace(/\\$/, '');
       const searchRegex = new RegExp(newText, 'gi');
-      return this.state.contacts.filter(contact =>
-        contact.name.match(searchRegex),
-      );
+      return contacts.filter(contact => contact.name.match(searchRegex));
     }
-    return this.state.contacts;
+    return contacts;
   };
 
-  filterContacts = () => {
-    if (this.state.value === 1) {
-      return this.searchContacts().filter(
-        contact => contact.type === 'Friends',
-      );
+  const filterContacts = () => {
+    if (tab === 1) {
+      return searchContacts().filter(contact => contact.type === 'Friends');
     }
-    if (this.state.value === 2) {
-      return this.searchContacts().filter(contact => contact.type === 'Family');
+    if (tab === 2) {
+      return searchContacts().filter(contact => contact.type === 'Family');
     }
-    if (this.state.value === 3) {
-      return this.searchContacts().filter(
-        contact => contact.type === 'Network',
-      );
+    if (tab === 3) {
+      return searchContacts().filter(contact => contact.type === 'Network');
     }
-    return this.searchContacts();
+    return searchContacts();
   };
 
-  render() {
-    const { classes } = this.props;
-    const { value, searchText } = this.state;
-    return (
-      <div className={classes.root}>
-        <h2>Contacts</h2>
-        <Tabs
-          value={value}
-          onChange={this.handleTabs}
-          indicatorColor="primary"
-          textColor="primary"
-          centered
+  const { classes } = props;
+  return (
+    <div className={classes.root}>
+      <h2>Contacts</h2>
+      <Tabs
+        value={tab}
+        onChange={handleTabs}
+        indicatorColor="primary"
+        textColor="primary"
+        centered
+      >
+        <Tab className={classes.tab} label="All" />
+        <Tab className={classes.tab} label="Friends" />
+        <Tab className={classes.tab} label="Family" />
+        <Tab className={classes.tab} label="Network" />
+      </Tabs>
+      <Paper className={classes.search} elevation={1}>
+        <InputBase
+          name="searchText"
+          value={searchText}
+          className={classes.input}
+          placeholder="Search contacts"
+          onChange={e => setSearchText(e.target.value)}
+        />
+        <IconButton className={classes.iconButton} aria-label="Search">
+          <SearchIcon />
+        </IconButton>
+      </Paper>
+      {filterContacts().map(contact => (
+        <ContactCard key={contact.id} contact={contact} />
+      ))}
+      <Link to="/add">
+        <Button
+          variant="contained"
+          color="primary"
+          className={classes.fullButton}
         >
-          <Tab className={classes.tab} label="All" />
-          <Tab className={classes.tab} label="Friends" />
-          <Tab className={classes.tab} label="Family" />
-          <Tab className={classes.tab} label="Network" />
-        </Tabs>
-        <Paper className={classes.search} elevation={1}>
-          <InputBase
-            name="searchText"
-            value={searchText}
-            className={classes.input}
-            placeholder="Search contacts"
-            onChange={this.handleSearch}
-          />
-          <IconButton className={classes.iconButton} aria-label="Search">
-            <SearchIcon />
-          </IconButton>
-        </Paper>
-        {this.filterContacts().map(contact => (
-          <ContactCard key={contact.id} contact={contact} />
-        ))}
-        <Link to="/add">
-          <Button
-            variant="contained"
-            color="primary"
-            className={classes.fullButton}
-          >
-            <AddIcon />
-            Add a contact
-          </Button>
-        </Link>
-      </div>
-    );
-  }
+          <AddIcon />
+          Add a contact
+        </Button>
+      </Link>
+    </div>
+  );
 }
 
 ContactList.propTypes = {
