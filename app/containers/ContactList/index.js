@@ -52,6 +52,9 @@ const styles = {
     width: '100%',
     margin: '20px auto',
   },
+  tabLabel: {
+    padding: '0 !important',
+  },
 };
 
 function ContactList(props) {

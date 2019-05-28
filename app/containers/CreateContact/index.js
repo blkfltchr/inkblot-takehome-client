@@ -1,5 +1,4 @@
-import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
+import React, { useState } from 'react';
 import { API, graphqlOperation } from 'aws-amplify';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
@@ -7,7 +6,6 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
-import OutlinedInput from '@material-ui/core/OutlinedInput';
 import MenuItem from '@material-ui/core/MenuItem';
 import InputLabel from '@material-ui/core/InputLabel';
 import { withRouter } from 'react-router';
@@ -26,31 +24,14 @@ const styles = () => ({
     margin: '10px 0',
   },
 });
-class CreateContact extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      name: '',
-      type: '',
-      email: '',
-      phonenumber: '',
-      photo: '',
-      labelWidth: 0,
-    };
-  }
+function CreateContact(props) {
+  const [name, setName] = useState('');
+  const [type, setType] = useState('');
+  const [email, setEmail] = useState('');
+  const [phonenumber, setPhonenumber] = useState('');
+  const [photo, setPhoto] = useState('');
 
-  componentDidMount() {
-    this.setState({
-      labelWidth: ReactDOM.findDOMNode(this.InputLabelRef).offsetWidth,
-    });
-  }
-
-  handleChange = e => {
-    this.setState({ [e.target.name]: e.target.value });
-  };
-
-  handleSubmit = async () => {
-    const { name, type, email, phonenumber, photo } = this.state;
+  const handleSubmit = async () => {
     try {
       const input = {
         name,
@@ -59,112 +40,91 @@ class CreateContact extends Component {
         phonenumber,
         photo,
       };
-      this.setState({
-        name: '',
-        type: '',
-        email: '',
-        phonenumber: '',
-        photo: '',
-      });
+      setName(name);
+      setType(type);
+      setEmail(email);
+      setPhonenumber(phonenumber);
+      setPhoto(photo);
       await API.graphql(graphqlOperation(mutations.createContact, { input }));
       console.log('New contact successfully added.');
-      this.props.history.push('/');
+      props.history.push('/');
     } catch (err) {
       console.log(err);
     }
   };
 
-  render() {
-    const { name, type, email, phonenumber, photo } = this.state;
-    const { classes } = this.props;
-    return (
-      <div>
-        <h2>Add a new contact</h2>
-        <form onSubmit={this.handleSubmit} className={classes.root}>
-          <FormControl className={classes.formControl}>
-            <TextField
-              id="standard-name"
-              label="Name"
-              name="name"
-              value={name}
-              onChange={this.handleChange}
-              variant="outlined"
-            />
-          </FormControl>
-          <FormControl className={classes.formControl}>
-            <TextField
-              id="email"
-              label="Email"
-              name="email"
-              value={email}
-              onChange={this.handleChange}
-              variant="outlined"
-            />
-          </FormControl>
-          <FormControl className={classes.formControl}>
-            <TextField
-              id="phonenumber"
-              label="Phone number"
-              name="phonenumber"
-              value={phonenumber}
-              onChange={this.handleChange}
-              variant="outlined"
-            />
-          </FormControl>
-          <FormControl variant="outlined" className={classes.formControl}>
-            <InputLabel
-              ref={node => {
-                this.InputLabelRef = node;
-              }}
-              htmlFor="outlined-relationship-simple"
-            >
-              Relationship
-            </InputLabel>
-            <Select
-              value={type}
-              onChange={this.handleChange}
-              input={
-                <OutlinedInput
-                  labelWidth={this.state.labelWidth}
-                  name="type"
-                  id="outlined-relationship-simple"
-                />
-              }
-            >
-              <MenuItem value="Friends">Friends</MenuItem>
-              <MenuItem value="Family">Family</MenuItem>
-              <MenuItem value="Network">Network</MenuItem>
-            </Select>
-          </FormControl>
-          <FormControl className={classes.formControl}>
-            <TextField
-              id="photo"
-              label="Photo"
-              name="photo"
-              value={photo}
-              onChange={this.handleChange}
-              variant="outlined"
-            />
-          </FormControl>
-          <FormControl>
-            <Typography color="secondary">
-              * All fields are required.
-            </Typography>
-          </FormControl>
-          <FormControl className={classes.formControl}>
-            <Button
-              type="button"
-              onClick={this.handleSubmit}
-              variant="contained"
-              color="primary"
-            >
-              Submit
-            </Button>
-          </FormControl>
-        </form>
-      </div>
-    );
-  }
+  const { classes } = props;
+  return (
+    <div>
+      <h2>Add a new contact</h2>
+      <form onSubmit={handleSubmit} className={classes.root}>
+        <FormControl className={classes.formControl}>
+          <TextField
+            id="standard-name"
+            label="Name"
+            name="name"
+            value={name}
+            onChange={e => setName(e.target.value)}
+          />
+        </FormControl>
+        <FormControl className={classes.formControl}>
+          <TextField
+            id="email"
+            label="Email"
+            name="email"
+            value={email}
+            onChange={e => setEmail(e.target.value)}
+          />
+        </FormControl>
+        <FormControl className={classes.formControl}>
+          <TextField
+            id="phonenumber"
+            label="Phone number"
+            name="phonenumber"
+            value={phonenumber}
+            onChange={e => setPhonenumber(e.target.value)}
+          />
+        </FormControl>
+        <FormControl className={classes.formControl}>
+          <InputLabel htmlFor="type-simple">Relationship</InputLabel>
+          <Select
+            value={type}
+            onChange={e => setType(e.target.value)}
+            inputProps={{
+              name: 'type',
+              id: 'type-simple',
+            }}
+          >
+            <MenuItem value="Friends">Friends</MenuItem>
+            <MenuItem value="Family">Family</MenuItem>
+            <MenuItem value="Network">Network</MenuItem>
+          </Select>
+        </FormControl>
+        <FormControl className={classes.formControl}>
+          <TextField
+            id="photo"
+            label="Photo"
+            name="photo"
+            value={photo}
+            onChange={e => setPhoto(e.target.value)}
+          />
+        </FormControl>
+        <FormControl>
+          <Typography color="secondary">* All fields are required.</Typography>
+        </FormControl>
+        <FormControl className={classes.formControl}>
+          <Button
+            type="button"
+            onClick={handleSubmit}
+            variant="contained"
+            color="primary"
+          >
+            Submit
+          </Button>
+        </FormControl>
+      </form>
+    </div>
+  );
 }
 
 CreateContact.propTypes = {

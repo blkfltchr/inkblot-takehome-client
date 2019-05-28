@@ -17,13 +17,16 @@ function ShowContact(props) {
   const [phonenumber, setPhonenumber] = useState('');
   const [photo, setPhoto] = useState('');
 
-  useEffect(async () => {
-    const contact = await props.contact;
-    setName(contact.name);
-    setType(contact.type);
-    setEmail(contact.email);
-    setPhonenumber(contact.phonenumber);
-    setPhoto(contact.photo);
+  useEffect(() => {
+    async function fetchContact() {
+      const contact = await props.contact;
+      setName(contact.name);
+      setType(contact.type);
+      setEmail(contact.email);
+      setPhonenumber(contact.phonenumber);
+      setPhoto(contact.photo);
+    }
+    fetchContact();
   }, []);
 
   const handleSubmit = async () => {
