@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { API, graphqlOperation } from 'aws-amplify';
 import Card from '@material-ui/core/Card';
@@ -10,40 +10,26 @@ import CardActions from '@material-ui/core/CardActions';
 import TextField from '@material-ui/core/TextField';
 import * as mutations from '../../graphql/mutations';
 
-class ShowContact extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      name: '',
-      type: '',
-      email: '',
-      phonenumber: '',
-      photo: '',
-    };
-  }
+function ShowContact(props) {
+  const [name, setName] = useState('');
+  const [type, setType] = useState('');
+  const [email, setEmail] = useState('');
+  const [phonenumber, setPhonenumber] = useState('');
+  const [photo, setPhoto] = useState('');
 
-  async componentDidMount() {
-    const contact = await this.props.contact;
-    this.setState({
-      name: contact.name,
-      type: contact.type,
-      email: contact.email,
-      phonenumber: contact.phonenumber,
-      photo: contact.photo,
-    });
-  }
+  useEffect(async () => {
+    const contact = await props.contact;
+    setName(contact.name);
+    setType(contact.type);
+    setEmail(contact.email);
+    setPhonenumber(contact.phonenumber);
+    setPhoto(contact.photo);
+  }, []);
 
-  handleChange = e => {
-    this.setState({
-      [e.target.name]: e.target.value,
-    });
-  };
-
-  handleSubmit = async () => {
-    const { name, type, email, phonenumber, photo } = this.state;
+  const handleSubmit = async () => {
     try {
       const input = {
-        id: this.props.contact.id,
+        id: props.contact.id,
         name,
         type,
         email,
@@ -58,52 +44,49 @@ class ShowContact extends Component {
     }
   };
 
-  render() {
-    const { classes, handleEdit } = this.props;
-    const { name, photo, type, phonenumber, email } = this.state;
-    return (
-      <Card className={classes.card}>
-        <CardMedia
-          className={classes.cover}
-          image={photo}
-          title={`${name} profile`}
-        />
-        <div className={classes.details}>
-          <CardContent className={classes.content}>
-            <TextField
-              value={name}
-              id="standard-name"
-              name="name"
-              onChange={this.handleChange}
-            />
-            <Typography variant="subtitle1" color="textSecondary">
-              {type}
-            </Typography>
-            <TextField
-              value={email}
-              id="email"
-              name="email"
-              onChange={this.handleChange}
-            />
-            <TextField
-              value={phonenumber}
-              id="phonenumber"
-              name="phonenumber"
-              onChange={this.handleChange}
-            />
-          </CardContent>
-          <CardActions className={classes.actions} disableActionSpacing>
-            <Button color="primary" onClick={this.handleSubmit}>
-              Save
-            </Button>
-            <Button color="secondary" onClick={handleEdit}>
-              Cancel
-            </Button>
-          </CardActions>
-        </div>
-      </Card>
-    );
-  }
+  const { classes, handleEdit } = props;
+  return (
+    <Card className={classes.card}>
+      <CardMedia
+        className={classes.cover}
+        image={photo}
+        title={`${name} profile`}
+      />
+      <div className={classes.details}>
+        <CardContent className={classes.content}>
+          <TextField
+            value={name}
+            id="standard-name"
+            name="name"
+            onChange={e => setName(e.target.value)}
+          />
+          <Typography variant="subtitle1" color="textSecondary">
+            {type}
+          </Typography>
+          <TextField
+            value={email}
+            id="email"
+            name="email"
+            onChange={e => setEmail(e.target.value)}
+          />
+          <TextField
+            value={phonenumber}
+            id="phonenumber"
+            name="phonenumber"
+            onChange={e => setPhonenumber(e.target.value)}
+          />
+        </CardContent>
+        <CardActions className={classes.actions} disableActionSpacing>
+          <Button color="primary" onClick={handleSubmit}>
+            Save
+          </Button>
+          <Button color="secondary" onClick={handleEdit}>
+            Cancel
+          </Button>
+        </CardActions>
+      </div>
+    </Card>
+  );
 }
 
 ShowContact.propTypes = {
