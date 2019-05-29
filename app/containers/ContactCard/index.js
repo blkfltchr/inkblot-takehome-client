@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import { API, graphqlOperation } from 'aws-amplify';
 import PropTypes from 'prop-types';
@@ -40,24 +40,19 @@ const styles = theme => ({
   },
 });
 
-class ContactCard extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      open: false,
-      isEditing: false,
-    };
-  }
+function ContactCard(props) {
+  const [open, setOpen] = useState(false);
+  const [isEditing, setIsEditing] = useState(false);
 
-  handleClickOpen = () => {
-    this.setState({ open: true });
+  const handleClickOpen = () => {
+    setOpen(true);
   };
 
-  handleClose = () => {
-    this.setState({ open: false });
+  const handleClose = () => {
+    setOpen(false);
   };
 
-  handleDelete = async id => {
+  const handleDelete = async id => {
     try {
       const input = { id };
       await API.graphql(graphqlOperation(mutations.deleteContact, { input }));
@@ -68,38 +63,34 @@ class ContactCard extends Component {
     }
   };
 
-  handleEdit = () => {
-    this.setState(prevState => ({
-      isEditing: !prevState.isEditing,
-    }));
+  const handleEdit = () => {
+    setIsEditing(isEditing => !isEditing);
   };
 
-  render() {
-    const { contact, classes } = this.props;
-    if (!this.state.isEditing) {
-      return (
-        <ShowContact
-          classes={classes}
-          contact={contact}
-          open={this.state.open}
-          handleEdit={this.handleEdit}
-          handleDelete={this.handleDelete}
-          handleClickOpen={this.handleClickOpen}
-          handleClose={this.handleClose}
-        />
-      );
-    }
+  const { contact, classes } = props;
+  if (!isEditing) {
     return (
-      <EditContact
+      <ShowContact
         classes={classes}
         contact={contact}
-        open={this.state.open}
-        handleEdit={this.handleEdit}
-        handleClickOpen={this.handleClickOpen}
-        handleClose={this.handleClose}
+        open={open}
+        handleEdit={handleEdit}
+        handleDelete={handleDelete}
+        handleClickOpen={handleClickOpen}
+        handleClose={handleClose}
       />
     );
   }
+  return (
+    <EditContact
+      classes={classes}
+      contact={contact}
+      open={open}
+      handleEdit={handleEdit}
+      handleClickOpen={handleClickOpen}
+      handleClose={handleClose}
+    />
+  );
 }
 
 ContactCard.propTypes = {
